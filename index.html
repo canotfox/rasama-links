@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RASAMA</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:#05060d;
+  color:white;
+}
+
+/* BACKGROUND */
+.bg{
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  background:linear-gradient(120deg,#05060d,#120a2a,#061a3a,#2a0a4a);
+  background-size:300% 300%;
+  animation:moveBg 10s ease infinite;
+}
+
+@keyframes moveBg{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ORBS */
+.orb{
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.55;
+  animation:float 12s ease-in-out infinite;
+}
+
+.orb1{background:#4f7cff; top:-140px; left:-140px;}
+.orb2{background:#8a4dff; bottom:-160px; right:-140px; animation-duration:16s;}
+.orb3{background:#00d4ff; top:45%; left:45%; width:300px; height:300px;}
+
+@keyframes float{
+  0%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(60px,-40px) scale(1.15)}
+  100%{transform:translate(0,0) scale(1)}
+}
+
+canvas{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+}
+
+/* CARD */
+.card{
+  width:420px;
+  max-width:92vw;
+  padding:30px;
+  border-radius:26px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 25px 90px rgba(0,0,0,.6);
+  text-align:center;
+  animation:show .7s ease;
+}
+
+@keyframes show{
+  from{opacity:0; transform:translateY(25px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+/* TITLE */
+h1{
+  margin-top:16px;
+  font-size:34px;
+  font-weight:800;
+  background: linear-gradient(90deg,#fff,#9aa7ff,#b18cff,#fff,#9aa7ff);
+  background-size:300% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer{
+  0%{background-position:0% 50%}
+  100%{background-position:300% 50%}
+}
+
+.subtitle{
+  margin-top:6px;
+  font-size:14px;
+  color:#cfcfe6;
+}
+
+/* LINKS */
+.links{
+  margin-top:28px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  height:56px;
+  border-radius:14px;
+  text-decoration:none;
+  color:white;
+  font-weight:600;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  transition:.25s;
+  position:relative;
+  overflow:hidden;
+}
+
+.link:hover{
+  transform:translateY(-3px);
+  background:linear-gradient(135deg,#4f7cff,#8a4dff);
+  box-shadow:0 12px 40px rgba(90,80,255,.35);
+}
+
+.link::before{
+  content:"";
+  position:absolute;
+  width:60%;
+  height:100%;
+  left:-120%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.3),transparent);
+  transform:skewX(-20deg);
+  transition:.6s;
+}
+
+.link:hover::before{
+  left:160%;
+}
+
+/* ICONS */
+.icon{
+  width:20px;
+  height:20px;
+  fill:white;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+  .card{padding:22px}
+  h1{font-size:30px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<canvas id="stars"></canvas>
+
+<div class="card">
+
+  <h1>RASAMA</h1>
+  <div class="subtitle">Официальные ссылки</div>
+
+  <div class="links">
+
+    <a class="link" href="https://www.donationalerts.com/r/canot" target="_blank">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95.49-7.43-2.99-6.94-6.94.39-3.13 2.91-5.65 6.04-6.04 3.95-.49 7.43 2.99 6.94 6.94-.39 3.13-2.91 5.65-6.04 6.04z"/>
+      </svg>
+      DonationAlerts
+    </a>
+
+    <a class="link" href="https://t.me/dorozhkamefaa" target="_blank">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M9.04 15.47l-.39 4.52c.56 0 .81-.24 1.11-.53l2.62-2.5 5.44 3.98c.99.55 1.7.26 1.95-.92l3.55-16.63h.01c.31-1.44-.52-2.01-1.48-1.65L1.7 9.14c-1.39.54-1.37 1.32-.24 1.67l5.8 1.81L19.14 6.3c.52-.32.99-.14.6.2"/>
+      </svg>
+      Telegram
+    </a>
+
+    <a class="link" href="https://www.tiktok.com/@rasama_co2?_r=1&_t=ZS-97CnjbrHmtR" target="_blank">
+      <svg class="icon" viewBox="0 0 24 24">
+        <path d="M21 8.5c-2.3 0-4.3-1.2-5.5-3v10.5c0 3-2.5 5.5-5.5 5.5S4.5 19 4.5 16s2.5-5.5 5.5-5.5c.3 0 .7 0 1 .1V13c-.3-.1-.6-.1-1-.1-1.9 0-3.5 1.6-3.5 3.5S8.1 20 10 20s3.5-1.6 3.5-3.5V2h2c.3 2.6 2.4 4.5 5.5 4.5v2z"/>
+      </svg>
+      TikTok
+    </a>
+
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let w,h;
+
+function resize(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const stars = Array.from({length:100}, () => ({
+  x: Math.random()*w,
+  y: Math.random()*h,
+  r: Math.random()*1.6,
+  dx:(Math.random()-0.5)*0.5,
+  dy:(Math.random()-0.5)*0.5
+}));
+
+function animate(){
+  ctx.clearRect(0,0,w,h);
+
+  for(let s of stars){
+    s.x += s.dx;
+    s.y += s.dy;
+
+    if(s.x<0||s.x>w) s.dx*=-1;
+    if(s.y<0||s.y>h) s.dy*=-1;
+
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(180,160,255,0.6)";
+    ctx.fill();
+  }
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+
+</body>
+</html>
